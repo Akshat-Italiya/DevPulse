@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { KanbanBoard } from './components/kanban/KanbanBoard';
 import { CodeVault } from './components/vault/CodeVault';
+import { MarkdownNotes } from './components/notes/MarkdownNotes';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'kanban' | 'vault' | 'notes'>('dashboard');
@@ -182,15 +183,7 @@ export default function App() {
 
           {activeTab === 'vault' && <CodeVault />}
 
-          {activeTab === 'notes' && (
-            <div className="flex-1 flex flex-col items-center justify-center p-12 border border-dashed border-slate-800 rounded-2xl text-center">
-              <FileText className="h-10 w-10 text-indigo-400 mb-3" />
-              <h3 className="text-lg font-semibold text-white mb-1">Markdown Documentation</h3>
-              <p className="text-xs text-slate-400 max-w-sm">
-                Module 3 will introduce live split-pane markdown editing and instant previewing.
-              </p>
-            </div>
-          )}
+          {activeTab === 'notes' && <MarkdownNotes />}
         </div>
       </main>
     </div>
