@@ -13,6 +13,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import { KanbanBoard } from './components/kanban/KanbanBoard';
+import { CodeVault } from './components/vault/CodeVault';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'kanban' | 'vault' | 'notes'>('dashboard');
@@ -179,15 +180,7 @@ export default function App() {
 
           {activeTab === 'kanban' && <KanbanBoard />}
 
-          {activeTab === 'vault' && (
-            <div className="flex-1 flex flex-col items-center justify-center p-12 border border-dashed border-slate-800 rounded-2xl text-center">
-              <Code2 className="h-10 w-10 text-indigo-400 mb-3" />
-              <h3 className="text-lg font-semibold text-white mb-1">Code & Prompt Vault</h3>
-              <p className="text-xs text-slate-400 max-w-sm">
-                Module 2 is up next! Here we will build a syntax-highlighted code and prompt manager.
-              </p>
-            </div>
-          )}
+          {activeTab === 'vault' && <CodeVault />}
 
           {activeTab === 'notes' && (
             <div className="flex-1 flex flex-col items-center justify-center p-12 border border-dashed border-slate-800 rounded-2xl text-center">
