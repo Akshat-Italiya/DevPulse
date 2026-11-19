@@ -9,8 +9,10 @@ import {
   Github,
   CheckCircle2,
   Clock,
-  Sparkles
+  Sparkles,
+  ArrowRight
 } from 'lucide-react';
+import { KanbanBoard } from './components/kanban/KanbanBoard';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'kanban' | 'vault' | 'notes'>('dashboard');
@@ -107,63 +109,95 @@ export default function App() {
               <span>Vite + React 18 + TS</span>
             </div>
             <a
-              href="https://github.com"
+              href="https://github.com/Akshat-Italiya/DevPulse"
               target="_blank"
               rel="noreferrer"
               className="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-3 py-1.5 rounded-lg border border-slate-700 transition"
             >
               <Github className="h-3.5 w-3.5" />
-              GitHub
+              GitHub Repo
             </a>
           </div>
         </header>
 
-        {/* Dashboard Content */}
-        <div className="p-8 max-w-7xl mx-auto w-full space-y-6">
-          {/* Welcome Banner */}
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-900/40 via-purple-900/30 to-slate-900 border border-indigo-500/20 p-8 shadow-2xl">
-            <div className="relative z-10 max-w-2xl">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 mb-3">
-                <Sparkles className="h-3 w-3" /> Learning Lab Active
-              </span>
-              <h2 className="text-2xl font-bold text-white tracking-tight mb-2">
-                Welcome to your DevPulse Learning Project
-              </h2>
-              <p className="text-sm text-slate-300 leading-relaxed">
-                This project is tailored to master <strong>React & TypeScript</strong> while learning the depths of <strong>VS Code</strong> and <strong>Antigravity</strong> workflows side-by-side.
+        {/* Tab Views */}
+        <div className="p-8 max-w-7xl mx-auto w-full flex-1 flex flex-col">
+          {activeTab === 'dashboard' && (
+            <div className="space-y-6">
+              {/* Welcome Banner */}
+              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-900/40 via-purple-900/30 to-slate-900 border border-indigo-500/20 p-8 shadow-2xl">
+                <div className="relative z-10 max-w-2xl">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 mb-3">
+                    <Sparkles className="h-3 w-3" /> Learning Lab Active
+                  </span>
+                  <h2 className="text-2xl font-bold text-white tracking-tight mb-2">
+                    Welcome to your DevPulse Learning Project
+                  </h2>
+                  <p className="text-sm text-slate-300 leading-relaxed mb-4">
+                    This project is tailored to master <strong>React & TypeScript</strong> while learning the depths of <strong>VS Code</strong> and <strong>Antigravity</strong> workflows side-by-side.
+                  </p>
+                  <button
+                    onClick={() => setActiveTab('kanban')}
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-lg shadow-lg shadow-indigo-600/30 transition"
+                  >
+                    Open Sprint Board <ArrowRight className="h-3.5 w-3.5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Quick Metrics */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-xs font-medium text-slate-400">Project Status</span>
+                    <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                  </div>
+                  <div className="text-2xl font-bold text-white mb-1">Live on GitHub</div>
+                  <p className="text-xs text-slate-400">Pushed to Akshat-Italiya/DevPulse</p>
+                </div>
+
+                <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-xs font-medium text-slate-400">VS Code Debugging</span>
+                    <Clock className="h-4 w-4 text-indigo-400" />
+                  </div>
+                  <div className="text-2xl font-bold text-white mb-1">F5 Ready</div>
+                  <p className="text-xs text-slate-400">launch.json configured with Chrome</p>
+                </div>
+
+                <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-xs font-medium text-slate-400">Sprint Kanban</span>
+                    <Activity className="h-4 w-4 text-purple-400" />
+                  </div>
+                  <div className="text-2xl font-bold text-white mb-1">Interactive</div>
+                  <p className="text-xs text-slate-400">Local state & storage sync active</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'kanban' && <KanbanBoard />}
+
+          {activeTab === 'vault' && (
+            <div className="flex-1 flex flex-col items-center justify-center p-12 border border-dashed border-slate-800 rounded-2xl text-center">
+              <Code2 className="h-10 w-10 text-indigo-400 mb-3" />
+              <h3 className="text-lg font-semibold text-white mb-1">Code & Prompt Vault</h3>
+              <p className="text-xs text-slate-400 max-w-sm">
+                Module 2 is up next! Here we will build a syntax-highlighted code and prompt manager.
               </p>
             </div>
-          </div>
+          )}
 
-          {/* Quick Metrics */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-medium text-slate-400">Project Status</span>
-                <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-              </div>
-              <div className="text-2xl font-bold text-white mb-1">Scaffolded</div>
-              <p className="text-xs text-slate-400">Ready for dependencies & GitHub push</p>
+          {activeTab === 'notes' && (
+            <div className="flex-1 flex flex-col items-center justify-center p-12 border border-dashed border-slate-800 rounded-2xl text-center">
+              <FileText className="h-10 w-10 text-indigo-400 mb-3" />
+              <h3 className="text-lg font-semibold text-white mb-1">Markdown Documentation</h3>
+              <p className="text-xs text-slate-400 max-w-sm">
+                Module 3 will introduce live split-pane markdown editing and instant previewing.
+              </p>
             </div>
-
-            <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-medium text-slate-400">VS Code Tools</span>
-                <Clock className="h-4 w-4 text-indigo-400" />
-              </div>
-              <div className="text-2xl font-bold text-white mb-1">Configured</div>
-              <p className="text-xs text-slate-400">launch.json, tasks.json, settings</p>
-            </div>
-
-            <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-medium text-slate-400">Antigravity Rules</span>
-                <Activity className="h-4 w-4 text-purple-400" />
-              </div>
-              <div className="text-2xl font-bold text-white mb-1">Ready</div>
-              <p className="text-xs text-slate-400">Autonomous skills & workflow ready</p>
-            </div>
-          </div>
+          )}
         </div>
       </main>
     </div>
